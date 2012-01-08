@@ -17,7 +17,7 @@ espeak-data/en_dict: espeak-data/phontab
 	cp ${HOME}/espeak-data/en_dict espeak-data/
 
 espeak-data/ko_dict: espeak-data/phontab espeak-data/dictsource/ko_list.orig espeak-data/dictsource/ko_rules
-	python -c "import sys,unicodedata;sys.stdout.write(unicodedata.normalize('NFD', sys.stdin.read().decode('utf8')).replace(u'\u110B',u'').encode('utf8'))" < espeak-data/dictsource/ko_list.orig > espeak-data/dictsource/ko_list
+	python -c "import sys,unicodedata;sys.stdout.write(unicodedata.normalize('NFKD', sys.stdin.read().decode('utf8')).replace(u'\u110B',u'').encode('utf8'))" < espeak-data/dictsource/ko_list.orig > espeak-data/dictsource/ko_list
 	cd espeak-data/dictsource/; espeak --compile=ko --path=../..
 	cp espeak-data/ko_dict ${HOME}/espeak-data/
 
