@@ -1,0 +1,7 @@
+phoneme u-
+  vowel starttype #u endtype #u
+  length 200
+  FMT(vowel/u#_5)
+endphoneme
+
+
