@@ -80,7 +80,7 @@
 		ᄆ	m
 
 .group		ᄅ	// ㄹ
-		ᄅ		r	// TODO: alveolar flap [ɾ]
+		ᄅ		*	// TODO: alveolar flap [ɾ]
 		ᄅ	(_	l
 
 .group		ᄒ	// ㅎ
@@ -93,13 +93,13 @@
 		ᅡ	a
 
 .group		ᅢ	// ㅐ
-		ᅢ	aa
+		ᅢ	E
 
 .group		ᅣ	// ㅑ
 		ᅣ	ja
 
 .group		ᅤ	// ㅒ
-		ᅤ	jaa
+		ᅤ	jE
 
 .group		ᅥ	// ㅓ
 		ᅥ	@
@@ -120,7 +120,7 @@
 		ᅪ	wa
 
 .group		ᅫ	// ㅙ
-		ᅫ	waa
+		ᅫ	wE
 
 .group		ᅬ	// ㅚ
 		ᅬ	we	// was [Y] until 1970s
@@ -232,11 +232,12 @@
 
 .group		ᇂ	// ㅎ
 		ᇂ		t
+		ᇂ	(A
 
 .group		ᆯ	// ㄹ
 		ᆯ		l
 		ᆯᄅ		l
-		ᆯ	(A	*r
+		ᆯ	(A	*
 
 .group		ᆰ	// ㄺ
 		ᆰ		k
@@ -264,7 +265,7 @@
 
 .group		ᆶ	// ㅀ
 		ᆶ		l
-		ᆶ	(A	*r
+		ᆶ	(A	*
 
 .group
        .
