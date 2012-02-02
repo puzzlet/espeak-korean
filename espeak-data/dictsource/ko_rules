@@ -148,6 +148,7 @@
 
 .group		ᅴ	// ㅢ
 		ᅴ	u-j	// TODO: [ɰi]
+	C)	ᅴ	i
 
 .group		ᅵ	// ㅣ
 		ᅵ	i
@@ -175,11 +176,15 @@
 
 .group		ᆮ	// ㄷ
 		ᆮ		t
+		ᆮᄂ		nn
+		ᆮᄆ		mm
 		ᆮᄒ		th
 		ᆮ	(L02	dZ;
 
 .group		ᇀ	// ㅌ
 		ᇀ		t
+		ᇀᄂ		nn
+		ᇀᄆ		mm
 		ᇀ	(A	th
 		ᇀ	(L02	tSh;
 
@@ -198,19 +203,27 @@
 
 .group		ᆺ	// ㅅ
 		ᆺ		t
+		ᆺᄂ		nn
+		ᆺᄆ		mm
 		ᆺ	(A	s
 		ᆺᄒ		s-
 
 .group		ᆻ	// ㅆ
 		ᆻ		t
+		ᆻᄂ		nn
+		ᆻᄆ		mm
 		ᆻ	(A	s-
 
 .group		ᆽ	// ㅈ
 		ᆽ		t
+		ᆽᄂ		nn
+		ᆽᄆ		mm
 		ᆽ	(A	tS;
 
 .group		ᆾ	// ㅊ
 		ᆾ		t
+		ᆾᄂ		nn
+		ᆾᄆ		mm
 		ᆾ	(A	tSh;
 
 .group		ᆫ	// ㄴ

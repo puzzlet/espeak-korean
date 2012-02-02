@@ -11,6 +11,7 @@ espeak-data/phontab: espeak-data/phsource/ph_korean espeak-data/phsource/phoneme
 	cp ${HOME}/espeak-data/phontab espeak-data/
 	cp ${HOME}/espeak-data/phonindex espeak-data/
 	cp ${HOME}/espeak-data/phondata espeak-data/
+	cp ${HOME}/espeak-data/intonations espeak-data/
 
 espeak-data/en_dict: espeak-data/phontab
 	cd espeak/dictsource/; espeak --compile=en
