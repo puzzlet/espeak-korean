@@ -1,0 +1,6 @@
+[submodule "espeak-korean"]
+	path = espeak-korean
+	url = https://github.com/puzzlet/espeak-korean
+[submodule "speak.js"]
+	path = speak.js
+	url = https://github.com/kripken/speak.js.git
