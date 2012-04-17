@@ -1,3 +1,3 @@
 [submodule "espeak"]
 	path = espeak
-	url = https://github.com/rhdunn/espeak.git
+	url = git://github.com/rhdunn/espeak.git
