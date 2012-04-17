@@ -1,0 +1,27 @@
+<html>
+<title>eSpeak 한국어 데이터 데모</title>
+<head>
+  <script>
+    // This demo is licensed under the GNU GPL.
+  </script>
+  <script src="speakClient.js"></script>
+</head>
+<body>
+  <h1>eSpeak 한국어 데이터 데모</h1>
+  <form onsubmit="speak(text.value, { amplitude: amplitude.value, wordgap: workdgap.value, pitch: pitch.value, speed: speed.value }); return false">
+    Text: <input type="text" name="text" size=50 value="JavaScript 음성합성 테스트">
+    Amplitude: <input type="text" name="amplitude" size=5 value="100">
+    Pitch: <input type="text" name="pitch" size=5 value="50">
+    Speed: <input type="text" name="speed" size=5 value="175">
+    Word gap: <input type="text" name="workdgap" size=5 value="0">
+    <input type="submit" value="Go!">
+  </form>
+  <hr>
+  <p>
+    eSpeak 한국어 데이터 테스트입니다. <a href="http://espeak.sourceforge.net/">eSpeak</a>을 <a href="http://emscripten.org">Emscripten</a>을 써서 자바스크립트로 컴파일한 <a href="https://github.com/kripken/speak.js">speak.js</a>를 사용했습니다.
+  </p>
+
+  <div id="audio"></div>
+</body>
+</html>
+
