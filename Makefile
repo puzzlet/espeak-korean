@@ -10,7 +10,7 @@ all: src/speakGenerator.debug.js src/speakGenerator.js
 $(DATA_FILES_TARGET):
 	( cd espeak-korean/; make )
 
-src/data.js: $(DATA_FILES_TARGET)
+src/data.js:
 	if [ ! -d src/data/ ]; then mkdir -p src/data/; fi
 	$(foreach f,$(DATA_FILES),\
 	    python "$(EMSCRIPTEN_PREFIX)/tools/file2json.py" "espeak-korean/espeak-data/$(f)" "$(f)" > "src/data/$(f).js"; \
@@ -34,10 +34,22 @@ src/post.js: src/data.js src/_post.js
 	cat src/_post.js > src/post.js
 
 src/speak.debug.js: src/speak.bc src/pre.js src/post.js
+	cd $(EMSCRIPTEN_PREFIX)/src/; \
+	    mv preamble.js preamble.js.bak; \
+	    cat preamble.js.bak | sed -r 's/function intArrayFromString.*$$/\0\nstringy=unescape(encodeURIComponent(stringy));/' > preamble.js
 	$(EMSCRIPTEN_PREFIX)/emcc -O0 src/speak.bc --pre-js src/pre.js --post-js src/post.js -o src/speak.debug.js
+	cd $(EMSCRIPTEN_PREFIX)/src/; \
+	    rm preamble.js; \
+	    mv preamble.js.bak preamble.js
 
 src/speak.js: src/speak.bc src/pre.js src/post.js
+	cd $(EMSCRIPTEN_PREFIX)/src/; \
+	    mv preamble.js preamble.js.bak; \
+	    cat preamble.js.bak | sed -r 's/function intArrayFromString.*$$/\0\nstringy=unescape(encodeURIComponent(stringy));/' > preamble.js
 	$(EMSCRIPTEN_PREFIX)/emcc -O2 src/speak.bc --pre-js src/pre.js --post-js src/post.js -o src/speak.js
+	cd $(EMSCRIPTEN_PREFIX)/src/; \
+	    rm preamble.js; \
+	    mv preamble.js.bak preamble.js
 
 src/speakGenerator.debug.js: src/speak.debug.js
 	cat speak.js/src/shell_pre.js src/speak.debug.js speak.js/src/shell_post.js > src/speakGenerator.debug.js
