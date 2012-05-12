@@ -28,7 +28,7 @@ src/speak.bc:
 	    CXXFLAGS="-DNEED_WCHAR_FUNCTIONS" $(EMSCRIPTEN_PREFIX)/emmake make -j 2 speak; \
         mv speak ../../src/speak.bc
 
-src/pre.js: srd/data.js src/_pre.js
+src/pre.js: src/data.js src/_pre.js
 	cat src/_pre.js src/data.js > src/pre.js
 
 src/post.js: src/data.js src/_post.js
