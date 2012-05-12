@@ -10,7 +10,7 @@ all: src/speakGenerator.debug.js src/speakGenerator.js
 $(DATA_FILES_TARGET):
 	( cd espeak-korean/; make )
 
-src/data.js:
+src/data.js: $(DATA_FILES_TARGET)
 	if [ ! -d src/data/ ]; then mkdir -p src/data/; fi
 	$(foreach f,$(DATA_FILES),\
 	    python "$(EMSCRIPTEN_PREFIX)/tools/file2json.py" "espeak-korean/espeak-data/$(f)" "$(f)" > "src/data/$(f).js"; \
@@ -25,7 +25,8 @@ src/speak.bc:
 	cd speak.js/src/; \
 	    make distclean; make clean; \
 	    rm -f libspeak.* speak speak.o; \
-	    CXXFLAGS="-DNEED_WCHAR_FUNCTIONS" $(EMSCRIPTEN_PREFIX)/emmake make -j 2 ../../src/speak.bc
+	    CXXFLAGS="-DNEED_WCHAR_FUNCTIONS" $(EMSCRIPTEN_PREFIX)/emmake make -j 2 speak; \
+        mv speak ../../src/speak.bc
 
 src/pre.js: src/_pre.js
 	cat src/_pre.js src/data.js > src/pre.js
@@ -56,4 +57,7 @@ src/speakGenerator.debug.js: src/speak.debug.js
 
 src/speakGenerator.js: src/speak.js
 	cat speak.js/src/shell_pre.js src/speak.js speak.js/src/shell_post.js > src/speakGenerator.js
+
+clean:
+	rm src/data.js src/pre.js src/post.js src/speak.bc src/speak.js src/speakGenerator.js src/speak.debug.js src/speakGenerator.debug.js
 
