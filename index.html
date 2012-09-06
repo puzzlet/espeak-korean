@@ -1,31 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>eSpeak 한국어 데이터 데모</title>
   <script>
     // This demo is licensed under the GNU GPL.
   </script>
-  <script src="speakClient.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+  <style>
+body
+{
+  font-family: sans-serif !important;
+}
+  </style>
 </head>
 <body>
-  <h1>eSpeak 한국어 데이터 데모</h1>
-  <form onsubmit="speak(text.value, { amplitude: amplitude.value, wordgap: workdgap.value, pitch: pitch.value, speed: speed.value }); return false">
-    Text: <input type="text" name="text" size=50 value="JavaScript 음성합성 테스트">
-    Amplitude: <input type="text" name="amplitude" size=5 value="100">
-    Pitch: <input type="text" name="pitch" size=5 value="50">
-    Speed: <input type="text" name="speed" size=5 value="175">
-    Word gap: <input type="text" name="workdgap" size=5 value="0">
-    <input type="submit" value="Go!">
-  </form>
-  <hr>
-  <p>
-    eSpeak 한국어 데이터 테스트입니다. <a href="http://espeak.sourceforge.net/">eSpeak</a>을 <a href="http://emscripten.org">Emscripten</a>을 써서 자바스크립트로 컴파일한 <a href="https://github.com/kripken/speak.js">speak.js</a>를 사용했습니다.
-  </p>
+  <a href="https://github.com/puzzlet/espeak-korean"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+  <div class="container">
+    <h1>eSpeak 한국어 데이터 데모</h1>
+    <form class="form-horizontal" onsubmit="return false">
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="text">Text:</label>
+          <div class="controls">
+            <textarea id="text" type="text" rows="5" class="input-xlarge">JavaScript 음성합성 테스트</textarea>
+          </div>
+        </div>
 
-  <p><a href="https://github.com/puzzlet/espeak-korean">소스 코드</a></p>
+        <div class="control-group">
+          <label class="control-label" for="amplitude">Amplitude:</label>
+          <div class="controls">
+            <input class="input-small" type="text" id="amplitude" name="amplitude" value="100">
+          </div>
 
-  <div id="audio"></div>
+          <label class="control-label" for="pitch">Pitch:</label>
+          <div class="controls">
+            <input class="input-small" type="text" id="pitch" name="pitch" value="50">
+          </div>
+
+          <label class="control-label" for="speed">Speed:</label>
+          <div class="controls">
+            <input class="input-small" type="text" id="speed" name="speed" value="175">
+          </div>
+
+          <label class="control-label" for="wordgap">Word gap:</label>
+          <div class="controls">
+            <input class="input-small" type="text" id="wordgap" name="wordgap" value="0">
+          </div>
+        </div>
+
+        <div class="control-actions">
+          <div class="controls">
+            <button id="btn-play" class="btn btn-primary">
+              <i class="icon-refresh icon-white"></i>
+              Synthesize
+            </button>
+            <button id="btn-pause" class="btn">
+              <i class="icon-pause"></i>
+              Pause
+            </button>
+            <button id="btn-resume" class="btn">
+              <i class="icon-play"></i>
+              Resume
+            </button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <hr>
+    <p>
+      eSpeak 한국어 데이터 데모입니다.
+      <a href="http://espeak.sourceforge.net/">eSpeak</a>을
+      <a href="http://emscripten.org">Emscripten</a>을
+      써서 자바스크립트로 컴파일한
+      <a href="https://github.com/kripken/speak.js">speak.js</a>를
+      사용했습니다.
+    </p>
+
+    <div id="audio"></div>
+  </div>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+  <script type="text/javascript">
+(function() {
+  $(function() {
+    $('#btn-play').click(function() {
+      var options;
+      console.log('Speech started');
+      options = {
+        amplitude: $('#amplitude').attr('value'),
+        wordgap: $('#wordgap').attr('value'),
+        pitch: $('#pitch').attr('value'),
+        speed: $('#speed').attr('value'),
+      };
+      speak.play($('#text').attr('value'), options, function() {
+        return console.log('Speech finished');
+      });
+      return false;
+    });
+    $('#btn-pause').click(function() {
+      speak.pause();
+      console.log('Speech paused');
+      return false;
+    });
+    return $('#btn-resume').click(function() {
+      speak.resume();
+      console.log('Speech resumed');
+      return false;
+    });
+  });
+}).call(this);
+  </script>
+  <script type="text/javascript" src="speakClient.js"></script>
 </body>
+<!--
+vim: et ts=2 sts=2 sw=2
+-->
 </html>
-
