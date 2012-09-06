@@ -3,4 +3,4 @@
 	url = git://github.com/puzzlet/espeak-korean.git
 [submodule "speak.js"]
 	path = speak.js
-	url = git://github.com/kripken/speak.js.git
+	url = git://github.com/katsuyan/speak.js.git
