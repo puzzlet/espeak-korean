@@ -1,4 +1,8 @@
+ESPEAK=espeak/src/espeak-ng
+
+
 all: espeak-data/en_dict espeak-data/ko_dict
+
 
 espeak-data/phontab: espeak-data/phsource/ph_korean espeak-data/phsource/phonemes.append espeak-data/voices/ko espeak-data/voices/mb/mb-hn1
 	rsync -aCv espeak/espeak-data/ ${HOME}/espeak-data/
@@ -7,11 +11,12 @@ espeak-data/phontab: espeak-data/phsource/ph_korean espeak-data/phsource/phoneme
 	cp espeak-data/voices/ko ${HOME}/espeak-data/voices/
 	cp espeak-data/voices/mb/mb-hn1 ${HOME}/espeak-data/voices/mb/
 	cat espeak-data/phsource/phonemes.append >> ${HOME}/espeak-data/phsource/phonemes
-	espeakedit --compile
+	$(ESPEAK) --compile
 	cp ${HOME}/espeak-data/phontab espeak-data/
 	cp ${HOME}/espeak-data/phonindex espeak-data/
 	cp ${HOME}/espeak-data/phondata espeak-data/
 	cp ${HOME}/espeak-data/intonations espeak-data/
+
 
 # cannot compile mbrola phoneme translation data from command line
 #espeak-data/mbrola_ph/hn1_phtrans:
@@ -20,9 +25,11 @@ espeak-data/phontab: espeak-data/phsource/ph_korean espeak-data/phsource/phoneme
 #	if [ ! -d espeak-data/mbrola_ph/ ]; then mkdir -p espeak-data/mbrola_ph/; fi
 #	cp ${HOME}/espeak-data/mbrola/hn1_phtrans espeak-data/mbrola/
 
+
 espeak-data/en_dict: espeak-data/phontab
-	cd espeak/dictsource/; espeak --compile=en
+	cd espeak/dictsource/; ../../$(ESPEAK) --compile=en
 	cp ${HOME}/espeak-data/en_dict espeak-data/
+
 
 espeak-data/dictsource/ko_list: espeak-data/dictsource/ko_list.orig
 	if [ -x `command -v python3` ]; then \
@@ -30,15 +37,16 @@ espeak-data/dictsource/ko_list: espeak-data/dictsource/ko_list.orig
     else python -c "import sys,unicodedata;sys.stdout.write(unicodedata.normalize('NFKD', sys.stdin.read().decode('utf8')).replace(u'\u110B',u'').encode('utf8'))" < espeak-data/dictsource/ko_list.orig > espeak-data/dictsource/ko_list; \
     fi
 
+
 espeak-data/ko_dict: espeak-data/phontab espeak-data/dictsource/ko_list espeak-data/dictsource/ko_rules
-	cd espeak-data/dictsource/; espeak --compile=ko --path=../..
-	cp espeak-data/ko_dict ${HOME}/espeak-data/
+	cd espeak-data/dictsource/; ../../$(ESPEAK) --compile=ko --path=../..
+
 
 speak:
-	espeak -v ko -X --path=${HOME} '안녕하세요 보이스 피싱입니다'
+	espeak -v ko -X --path=. '안녕하세요 보이스 피싱입니다'
+
 
 clean:
 	rm -R espeak-data/phontab espeak-data/phonindex espeak-data/phondata
 	rm -R espeak-data/en_dict espeak-data/ko_dict
 	rm espeak-data/dictsource/ko_list
-
